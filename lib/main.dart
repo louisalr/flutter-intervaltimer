@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intervaltimer/screens/home_screen.dart';
+import 'package:intervaltimer/screens/new_timer_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Text('Flutter Interval timer'),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => const HomeScreen(),
+        NewTimerScreen.routeName: (ctx) => const NewTimerScreen()
+      },
     );
   }
 }
