@@ -19,7 +19,11 @@ class LatestTimerItem extends StatelessWidget {
 
   String durationToString(Duration duration) {
     var seconds = (duration.inMilliseconds % (60 * 1000)) / 1000;
-    return '${duration.inMinutes}m${seconds.toStringAsFixed(2)}s';
+    print(seconds.toStringAsFixed(2));
+    if(seconds.toStringAsFixed(2) == "0.00"){
+      return '${duration.inMinutes} minutes';
+    }
+    return '${duration.inMinutes} m ${seconds.toStringAsFixed(2)}s';
   }
 
   @override
@@ -30,24 +34,13 @@ class LatestTimerItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(durationToString(activeTime)),
-            ],
+          Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(name, style: const TextStyle(fontSize: 30),)
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(durationToString(restTime)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(numberReps.toString()),
-            ],
-          ),
+          Text('Active time : ${durationToString(activeTime)}'),
+          Text('Rest : ${durationToString(restTime)}'),
+          Text('Reps : ${numberReps.toString()}'),
           const Padding(padding: EdgeInsets.only(top: 20)),
           ElevatedButton(
             onPressed: () {
